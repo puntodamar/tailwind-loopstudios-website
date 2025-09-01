@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -9,14 +8,26 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+  /* Global border color */
   *,
-  ::after,
   ::before,
+  ::after,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    /* Option A: use Tailwind theme token */
+    border-color: theme('colors.gray.200');
+    /* Option B: or just apply the utility:
+       @apply border-gray-200;
+       (can't mix raw property + @apply in same block for all selectors cleanly) */
   }
+
+  /* h5 styles with Tailwind utilities */
+  /*h5 {*/
+  /*  @apply absolute px-6 md:px-10 w-52 bottom-4 md:bottom-8 duration-200*/
+  /*  group-hover:scale-110 group-hover:text-black;*/
+  /*}*/
 }
+
 
 #hero {
   background-image: url('../assets/desktop/image-hero.jpg');
@@ -28,3 +39,24 @@
   background-image: url('../assets/mobile/image-hero.jpg');
   background-position: center center;
 }
+
+
+
+@layer components {
+  .btn {
+    @apply px-10 py-2 my-0 font-bold tracking-widest uppercase border-2 text-black border-black hover:bg-black hover:text-white
+  }
+
+  .item-container {
+    @apply flex flex-col justify-between w-full space-y-6 text-2xl text-white uppercase md:flex-row md:space-y-0 md:space-x-8 p-6
+  }
+
+  .item {
+    @apply relative overflow-hidden md:w-1/4
+  }
+
+  .item-gradient {
+    @apply absolute inset-0 bg-gradient-to-b from-transparent to-gray-900
+  }
+}
+
